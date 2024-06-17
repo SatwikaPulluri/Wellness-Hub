@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book an Appointment</title>
+    <style>
+        /* CSS styles for the entire page */
+        body {
+            background-color: #f0f0f0; /* Background color */
+            color: black; /* Text color */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center; /* Center content horizontally */
+            align-items: center; /* Center content vertically */
+            flex-direction: column; /* Align items in a column */
+            height: 100vh;
+        }
+
+        .header {
+            width: 100%;
+            background-color: #a3a375;
+            color: rgb(12, 12, 12);
+            padding: 10px 20px; /* Adjust padding for logo and contact */
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex; /* Flex container for logo, header text, and contact */
+            align-items: center; /* Center vertically */
+            justify-content: space-between; /* Align items from left to right with space in between */
+            height: 160px; /* Decreased height by 1 inch (176 pixels) */
+            font-family: "Garamond", cursive;
+        }
+
+        .header img {
+            height: 140px; /* Adjust height of logo */
+            margin-right: 10px; /* Add space between logo and text */
+        }
+
+        .header h1 {
+            margin: 0; /* Remove default margin */
+            text-align: center; /* Center align text */
+            font-size: 45px; /* Adjust font size as needed */
+            flex-grow: 1; /* Allow header text to grow and take remaining space */
+            margin-left: -0.5in; /* Move text 0.5 inch to the left */
+        }
+
+        .support {
+            margin-left: -1in; /* Move support section 1 inch to the left */
+            display: flex;
+            align-items: center;
+            font-size: 1em;
+        }
+
+        .support-button {
+            background-color: #000000;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .support-button:hover {
+            color: #45a049;
+        }
+
+        .support-button img {
+            height: 24px;
+            margin-right: 5px;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 60px; /* Adjust margin to leave space for the fixed header */
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        select {
+            margin-bottom: 10px;
+            padding: 8px;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .slot {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .available {
+            background-color: green;
+        }
+
+        .unavailable {
+            background-color: grey;
+        }
+
+        .selected {
+            background-color: blue;
+        }
+
+        #confirmButton {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #joinButton {
+            background-color: #4285F4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #meetingContainer {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #meetingIframe {
+            border: none;
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="logo3.png" alt="Logo"> <!-- Replace with your actual logo path -->
+        <h1>Your Booking</h1>
+        <div class="support">
+            <button class="support-button" onclick="callSupport()">
+                <img src="phone2.png" alt="Phone Icon">
+                Contact Us: (123) 456-7890
+            </button>
+        </div>
+    </div>
+    <div class="container">
+        <h2>Book an Appointment</h2>
+        <select id="doctor">
+            <option value="General Physician">General Physician</option>
+            <option value="Orthopaedic">Orthopaedic</option>
+            <option value="Dentist">Dentist</option>
+            <option value="Pediatrician">Pediatrician</option>
+            <option value="ENT">ENT</option>
+        </select>
+        <div id="slots">
+            <!-- Slots will be dynamically populated here -->
+        </div>
+        <button id="confirmButton">Confirm Booking</button>
+        <button id="joinButton">Join Meeting</button>
+        <div id="meetingContainer">
+            <iframe id="meetingIframe" src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Simulated data for available slots
+        const availableSlots = {
+            "General Physician": ["9:00 AM", "10:00 AM", "11:00 AM"],
+            "Orthopaedic": ["2:00 PM", "3:00 PM", "4:00 PM"],
+            "Dentist": ["10:00 AM", "11:00 AM", "12:00 PM"],
+            "Pediatrician": ["10:00 AM", "11:00 AM", "12:00 PM"],
+            "ENT": ["10:00 AM", "11:00 AM", "12:00 PM"]
+        };
+
+        const doctorSelect = document.getElementById("doctor");
+        const slotsDiv = document.getElementById("slots");
+        const joinButton = document.getElementById("joinButton");
+        const meetingContainer = document.getElementById("meetingContainer");
+        const meetingIframe = document.getElementById("meetingIframe");
+        const confirmButton = document.getElementById("confirmButton");
+
+        // Function to populate slots based on selected doctor
+        function populateSlots() {
+            const doctor = doctorSelect.value;
+            const slots = availableSlots[doctor];
+
+            slotsDiv.innerHTML = "";
+            slots.forEach(slot => {
+                const slotDiv = document.createElement("div");
+                slotDiv.textContent = slot;
+                slotDiv.classList.add("slot");
+
+                // Check if slot is available or not
+                if (slot === "11:00 AM") {
+                    slotDiv.classList.add("unavailable");
+                } else {
+                    slotDiv.classList.add("available");
+                }
+
+                // Add event listener to select slot
+                slotDiv.addEventListener("click", () => {
+                    // Remove selected class from all slots
+                    document.querySelectorAll(".slot").forEach(slot => {
+                        slot.classList.remove("selected");
+                    });
+
+                    // Add selected class to clicked slot
+                    slotDiv.classList.add("selected");
+
+                    // Show confirm button
+                    confirmButton.style.display = "inline-block";
+                });
+
+                slotsDiv.appendChild(slotDiv);
+            });
+        }
+
+        // Initial population of slots
+        populateSlots();
+
+        // Event listener for doctor selection change
+        doctorSelect.addEventListener("change", () => {
+            confirmButton.style.display = "none"; // Hide confirm button when doctor changes
+            joinButton.style.display = "none"; // Hide join button when doctor changes
+            meetingContainer.style.display = "none"; // Hide meeting container when doctor changes
+            populateSlots();
+        });
+
+        // Event

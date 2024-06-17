@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Your Goals</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin: 20px 0;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form-group .scrollable {
+            max-height: 100px; /* Adjust this value as needed */
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .form-group .radio-group {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+
+        .form-group .radio-group label {
+            background-color: #ddd;
+            color: #333;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-bottom: 5px;
+            text-align: center;
+            font-size: 0.9em; /* Smaller font size */
+        }
+
+        .form-group .radio-group input[type="radio"] {
+            display: none;
+        }
+
+        .form-group .radio-group input[type="radio"]:checked + label {
+            background-color: #bbb; /* Slightly darker grey when selected */
+        }
+
+        #submitBtn {
+            display: block;
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Set Your Goals</h1>
+        <form id="goalForm">
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <div class="scrollable">
+                    <div class="radio-group">
+                        <input type="radio" id="male" name="gender" value="male" required>
+                        <label for="male">Male</label>
+                        
+                        <input type="radio" id="female" name="gender" value="female" required>
+                        <label for="female">Female</label>
+                        
+                        <input type="radio" id="other" name="gender" value="other" required>
+                        <label for="other">Other</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="currentWeight">Current Weight (kg):</label>
+                <input type="number" id="currentWeight" name="currentWeight" required>
+            </div>
+            <div class="form-group">
+                <label for="goalWeight">Goal Weight (kg):</label>
+                <input type="number" id="goalWeight" name="goalWeight" required>
+            </div>
+            <div class="form-group">
+                <label for="caloriesBurn">Calories to Burn per Week:</label>
+                <input type="number" id="caloriesBurn" name="caloriesBurn" required>
+            </div>
+            <button type="submit" id="submitBtn">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('goalForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const currentWeight = document.getElementById('currentWeight').value;
+            const goalWeight = document.getElementById('goalWeight').value;
+            const caloriesBurn = document.getElementById('caloriesBurn').value;
+
+            // Redirect to the muscle gain page
+            window.location.href = `todo3.html?gender=${gender}&currentWeight=${currentWeight}&goalWeight=${goalWeight}&caloriesBurn=${caloriesBurn}`;
+        });
+    </script>
+</body>
+</html>

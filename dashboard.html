@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            background-color: white; /* Background color */
+            color: #000000; /* Text color */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        header {
+            height: 180px; /* Set header height */
+            padding: 20px; /* Adjusted padding */
+            color: rgb(12, 12, 12);
+            display: flex;
+            flex-direction: column; /* Arrange elements in a column */
+            justify-content: flex-start; /* Align elements at the top initially */
+            width: 100%;
+            background-color: #a3a375;
+            box-sizing: border-box;
+            position: relative; /* Relative positioning for absolute children */
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            position: relative;
+            height: 100%;
+            width: 100%; /* Ensure it fills the header */
+        }
+        .logo {
+            height: 150px; /* Adjust the size of the logo to fill the header height */
+            position: absolute;
+            left: 20px;
+            top: 0.1in; /* Move the logo half an inch down */
+        }
+
+        .header-container h1 {
+            margin: 0;
+            text-align: center;
+            font-size: 50px;
+            font-family: "Garamond", cursive;
+        }
+
+        .support {
+            display: flex;
+            align-items: center;
+            font-size: 1em;
+            position: absolute;
+            right: 20px;
+        }
+
+        .support-button {
+            background-color: #000000;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .support-button:hover {
+            color: #45a049;
+        }
+
+        .support-button img {
+            height: 24px;
+            margin-right: 5px;
+        }
+
+        .dashboard-options {
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* Space between options */
+            position: absolute;
+            bottom: 10px;; /* Move options 2 inches down within the header */
+            width: 100%;
+        }
+
+        .option a {
+            text-decoration: none;
+            color: black; /* Link color */
+            font-size: 14px; /* Reduced font size for smaller buttons */
+            padding: 8px 15px; /* Adjusted padding for smaller buttons */
+            border: 2px solid white;
+            border-radius: 10px;
+            display: inline-block; /* Inline block for horizontal layout */
+            white-space: nowrap; /* Ensure text does not wrap */
+        }
+
+        .option a:hover {
+            background-color: white;
+            color: black;
+        }
+
+        @media (max-width: 600px) {
+            .header-container h1 {
+                font-size: 30px; /* Smaller font size for smaller screens */
+            }
+            .option a {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+            .dashboard-options {
+                flex-direction: column; /* Stack options vertically on small screens */
+                align-items: center;
+                top: auto; /* Reset top for small screens */
+                position: static; /* Reset positioning for small screens */
+                padding-top: 20px; /* Add padding for small screens */
+            }
+        }
+    </style>
+    <script>
+        function callSupport() {
+            window.location.href = "tel:+11234567890";
+        }
+    </script>
+</head>
+<body>
+<header>
+    <div class="header-container">
+        <img src="logo3.png" alt="Wellness Hub Logo" class="logo">
+        <h1>Your Dashboard</h1>
+        <div class="support">
+            <button class="support-button" onclick="callSupport()">
+                <img src="phone2.png" alt="Phone Icon">
+                Contact Us: (123) 456-7890
+            </button>
+        </div>
+    </div>
+    <div class="dashboard-options">
+        <div class="option">
+            <a href="book-appointment.html" aria-label="Book an Appointment">Book an Appointment</a>
+        </div>
+        <div class="option">
+            <a href="ai-doctor-chatbot.html">AI Doctor Chat Bot</a>
+        </div>
+        <div class="option">
+            <a href="fitness-tracker.html" aria-label="Fitness Tracker">Fitness Tracker</a>
+        </div>
+        <div class="option">
+            <a href="e-shopping.html" aria-label="E-Shopping">E-Shopping</a>
+        </div>
+    </div>
+</header>
+<div class="dashboard-container">
+    <!-- Additional content can go here -->
+</div>
+</body>
+</html>

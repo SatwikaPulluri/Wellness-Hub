@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <style>
+        /* Your CSS styles here */
+    </style>
+</head>
+<body>
+    <div id="cart-page" class="container">
+        <h1>Your Cart</h1>
+        <div id="cart-items">
+            <!-- Cart items will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        // Retrieve cart items from local storage
+        const cartItems = JSON.parse(localStorage.getItem('cart'));
+
+        // Display cart items
+        const cartItemsContainer = document.getElementById('cart-items');
+        cartItemsContainer.innerHTML = '';
+
+        cartItems.forEach(product => {
+            const cartItem = document.createElement('div');
+            cartItem.classList.add('cart-item');
+            cartItem.innerHTML = `
+                <p>${product.name}</p>
+                <p>Price: ₹${product.price.toFixed(2)}</p>
+                <p>Quantity: ${product.quantity}</p>
+                <p>Total: ₹${(product.price * product.quantity).toFixed(2)}</p>
+            `;
+            cartItemsContainer.appendChild(cartItem);
+        });
+    </script>
+</body>
+</html>

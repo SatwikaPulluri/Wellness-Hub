@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List for Muscle Gain</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .info-list {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-item {
+            padding: 10px 0;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .todo-list {
+            margin-top: 20px;
+        }
+
+        .todo-item {
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List for Muscle Gain</h1>
+        <div id="infoList" class="info-list"></div>
+        <div id="todoList" class="todo-list"></div>
+    </div>
+    <script>
+        // Extract parameters from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const gender = urlParams.get('gender');
+        const currentWeight = urlParams.get('currentWeight');
+        const goalWeight = urlParams.get('goalWeight');
+        const caloriesBurn = urlParams.get('caloriesBurn');
+
+        // Generate information items based on the parameters
+        const infoList = [
+            `Gender: ${gender}`,
+            `Current Weight: ${currentWeight} kg`,
+            `Goal Weight: ${goalWeight} kg`,
+            `Calories to Burn per Week: ${caloriesBurn}`
+        ];
+
+        const infoListContainer = document.getElementById('infoList');
+        infoList.forEach(item => {
+            const infoItem = document.createElement('div');
+            infoItem.className = 'info-item';
+            infoItem.textContent = item;
+            infoListContainer.appendChild(infoItem);
+        });
+
+        // Generate to-do list items
+        const todoList = [
+            '1. Increase caloric intake to support muscle growth.',
+            '2. Focus on compound exercises like squats, deadlifts, and bench presses.',
+            '3. Ensure adequate protein intake to support muscle repair and growth.',
+            '4. Get enough rest and sleep to allow your muscles to recover.',
+            '5. Stay consistent with your training and nutrition plan.',
+            '6. Stay motivated and consistent.'
+        ];
+
+        const todoListContainer = document.getElementById('todoList');
+        todoList.forEach(item => {
+            const todoItem = document.createElement('div');
+            todoItem.className = 'todo-item';
+            todoItem.textContent = item;
+            todoListContainer.appendChild(todoItem);
+        });
+    </script>
+</body>
+</html>
